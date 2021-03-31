@@ -1,6 +1,7 @@
 var firebaseConfig = {
 apiKey: "AIzaSyCVWrQYrHjze_2rVDNuARf8eecp115Uq9U",
 authDomain: "chatweb-53865.firebaseapp.com",
+databaseURL: "https://chatweb-53865-default-rtdb.firebaseio.com",
 projectId: "chatweb-53865",
 storageBucket: "chatweb-53865.appspot.com",
 messagingSenderId: "889379280424",
