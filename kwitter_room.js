@@ -10,7 +10,7 @@ var firebaseConfig = {
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
 username=localStorage.getItem("username");
-document.getElementById("username").innerHTML="welcome "+username+" !!!";
+document.getElementById("username").innerHTML="Welcome "+username+" !!!";
 function addroomname(){
       roomname=document.getElementById("rn").value;
       firebase.database().ref("/").child(roomname).update({
@@ -30,4 +30,9 @@ function redtorm(name){
       console.log(name);
       localStorage.setItem("rn",name);
       window.location="kwitterpage.html";
+}
+function logout(){
+      localStorage.removeItem("username");
+      localStorage.removeItem("rn");
+      window.location="index.html";
 }
