@@ -13,11 +13,19 @@ var firebaseConfig = {
     console.log(roomname);
     username=localStorage.getItem("username");
 function getData() { firebase.database().ref("/"+roomname).on('value', function(snapshot) { document.getElementById("output").innerHTML = ""; snapshot.forEach(function(childSnapshot) { childKey  = childSnapshot.key; childData = childSnapshot.val(); if(childKey != "purpose") {
-         firebase_message_id = childKey;
-         message_data = childData;
-
-
-
+         firebasemessageid = childKey;
+         messagedata = childData;
+      console.log(firebasemessageid);
+      console.log(messagedata);
+      sender=messagedata["name"];
+      mess=messagedata["msg"];
+      like=messagedata["likes"];
+      namewtag="<h4>"+sender+"<img class='user_tick' src='tick.png'></h4>";
+      messagewtag="<h4 class='message_h4'>"+mess+"</h4>";
+      likebutton="<button class='btn btn-warning' id="+firebasemessageid+" value="+like+" onclick='updatelike(this.id);'>";
+      spanwtag="<span class='glyphicon glyphicon-thumbs-up'>like:"+like+"</span></button><hr>";
+      row=namewtag+messagewtag+likebutton+spanwtag;
+      document.getElementById("output").innerHTML+=row;
       } });  }); }
 getData();
 
@@ -30,6 +38,18 @@ function send(){
       });
       document.getElementById("msg").value="";
 }
-
+function updatelike(messageid){
+      likes=document.getElementById(messageid).value;
+      updlikes=Number(likes)+1;
+      firebase.database().ref(roomname).child(messageid).update({
+            likes:updlikes,
+      })
+      console.log(updlikes);
+}
+function logout(){
+      localStorage.removeItem("username");
+      localStorage.removeItem("rn");
+      window.location="index.html";
+}
 
 
